@@ -1,11 +1,14 @@
 package eth
 
 import (
+	"github.com/DE-labtory/zulu/account/ethereum"
 	"github.com/DE-labtory/zulu/keychain"
 	"github.com/DE-labtory/zulu/types"
 )
 
-type Service struct{}
+type Service struct {
+	ethereum.Deriver
+}
 
 func NewService() *Service {
 	return nil

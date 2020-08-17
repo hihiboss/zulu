@@ -6,8 +6,30 @@ import (
 )
 
 type Deriver struct {
+	network types.Network
+	client  Client
+	coin    types.Coin
 }
 
-func (s *Deriver) DeriveAccount(key keychain.Key) (types.Account, error) {
-	return types.Account{}, nil
+func NewDeriver(network types.Network, coin types.Coin) *Deriver {
+	return &Deriver{
+		network: network,
+		client:  NewGethClient(network),
+		coin:    coin,
+	}
+}
+
+func (d *Deriver) DeriveAccount(key keychain.Key) (types.Account, error) {
+	address := DeriveAddress(key)
+
+	balance, err := d.client.BalanceAt(address)
+	if err != nil {
+		return types.Account{}, err
+	}
+
+	return types.Account{
+		Address: address,
+		Coin:    d.coin,
+		Balance: balance.String(),
+	}, nil
 }
