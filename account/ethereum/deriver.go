@@ -11,7 +11,8 @@ type Deriver struct {
 	coin    types.Coin
 }
 
-func NewDeriver(network types.Network, coin types.Coin) *Deriver {
+func NewDeriver(coin types.Coin) *Deriver {
+	network := coin.Blockchain.Network
 	return &Deriver{
 		network: network,
 		client:  NewGethClient(network),

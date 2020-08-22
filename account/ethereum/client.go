@@ -2,10 +2,11 @@ package ethereum
 
 import (
 	"context"
+	"math/big"
+
 	"github.com/DE-labtory/zulu/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"math/big"
 )
 
 type Client interface {
